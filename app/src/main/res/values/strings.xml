@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Digital Turbine Challenge</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <!-- general snackbar/toast messages -->
+    <string name="no_internet_warning">This app requires internet access. Please enable internet and try again.</string>
+
+
+</resources>
