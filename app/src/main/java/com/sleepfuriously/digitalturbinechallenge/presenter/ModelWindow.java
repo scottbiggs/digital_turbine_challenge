@@ -1,7 +1,11 @@
 package com.sleepfuriously.digitalturbinechallenge.presenter;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.sleepfuriously.digitalturbinechallenge.model.DetailItem;
 import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
 
@@ -48,6 +52,21 @@ public class ModelWindow {
     }
 
 
+    /**
+     * Starts the process of getting a list of all the items at the top-level.
+     * That data will be returned the the supplied listener (see below).
+     *
+     * @param listener  The instance that implements {@link ModelWindowTopLevelListener}.
+     *                  Its {@link ModelWindowTopLevelListener#returnTopLevelList(List, boolean, String)}
+     *                  method will be called when the value has been retrieved.
+     *
+     * @param ctx   Ye good ol' Context.
+     */
+    public void getTopLevelList(final ModelWindowTopLevelListener listener, Context ctx) {
+
+        RequestQueue q = Volley.newRequestQueue(ctx);
+
+    }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  interfaces & classes
