@@ -1,5 +1,6 @@
 package com.sleepfuriously.digitalturbinechallenge.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -44,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     //----------------------
     //  widgets
     //----------------------
+
+    RecyclerView mMainRecyclerView;
+
+    /** Gives user something to look at while waiting for data access */
+    ProgressDialog mProgressDialog;
+
 
     //----------------------
     //  data
@@ -91,13 +98,16 @@ public class MainActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.item_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
-    }
+        mMainRecyclerView = findViewById(R.id.item_list);
+        assert mMainRecyclerView != null;
+        mMainRecyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle(R.string.initial_load_msg);
+        mProgressDialog.show();
+
     }
 
 
