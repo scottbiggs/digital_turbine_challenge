@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import android.widget.Toast;
 
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
+import com.sleepfuriously.digitalturbinechallenge.model.MyXmlParser;
+import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
+import com.sleepfuriously.digitalturbinechallenge.presenter.ModelWindow;
 
 import java.util.List;
 
@@ -34,7 +38,8 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements ModelWindow.ModelWindowTopLevelListener {
 
     //----------------------
     //  constants
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     //  data
     //----------------------
 
+    SimpleItemRecyclerViewAdapter mRecyclerAdapter;
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -70,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+
+        // todo:------------ testing my parser
+
+        String test = "<xmlns>sf<something>";
+
+        Log.v(TAG, test + " getFirstContent() --> \n   " + MyXmlParser.getFirstContent(test));
+
+        // todo:------------ end test
+
 
         // First things first, gotta be on the internet!
         if (!isInternetAvailable()) {
@@ -100,7 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
         mMainRecyclerView = findViewById(R.id.item_list);
         assert mMainRecyclerView != null;
-        mMainRecyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+
+//        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane);
+//        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane);
+//        mMainRecyclerView.setAdapter(mRecyclerAdapter);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
@@ -108,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         mProgressDialog.setTitle(R.string.initial_load_msg);
         mProgressDialog.show();
 
+        ModelWindow mw = ModelWindow.getInstance();
+        mw.requestTopLevelList(this, this);
     }
 
 
@@ -124,6 +145,34 @@ public class MainActivity extends AppCompatActivity {
                 && activeNetworkInfo.isConnected();
     }
 
+    /**
+     * Called when the top-level list is ready.
+     *
+     * @param topLevelList  A list of TopLevelItems populated with the results
+     *                      from the server call.
+     *
+     * @param successful    True means that the call was successful.
+     *                      False indicates an error.
+     *
+     * @param errMsg        Error message. Only used if successful == false
+     */
+    @Override
+    public void returnTopLevelList(List<TopLevelItem> topLevelList, boolean successful, String errMsg) {
+
+        if (!successful) {
+            Log.e(TAG, "returnTopLevelList() is unsuccessful. Msg = " + errMsg);
+            Toast.makeText(this, R.string.no_internet_warning, Toast.LENGTH_LONG).show();
+            finish();
+            return; // might be redundant?
+        }
+
+        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, topLevelList, mTwoPane);
+        mMainRecyclerView.setAdapter(mRecyclerAdapter);
+
+        mProgressDialog.dismiss();
+
+    }
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  classes
@@ -133,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final MainActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<DummyContent.DummyItem> mValues = null;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -158,9 +207,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
         SimpleItemRecyclerViewAdapter(MainActivity parent,
-                                      List<DummyContent.DummyItem> items,
+                                      List<TopLevelItem> items,
+//                                      List<DummyContent.DummyItem> items,
                                       boolean twoPane) {
-            mValues = items;
+            // todo: fill in data
+//            mValues = items;
+
             mParentActivity = parent;
             mTwoPane = twoPane;
         }
