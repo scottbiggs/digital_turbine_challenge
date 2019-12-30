@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
-import com.sleepfuriously.digitalturbinechallenge.model.MyXmlParser;
 import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
 import com.sleepfuriously.digitalturbinechallenge.presenter.ModelWindow;
 
@@ -77,15 +76,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
-
-        // todo:------------ testing my parser
-
-        String test = "<xmlns>sf<something>";
-
-        Log.v(TAG, test + " getFirstContent() --> \n   " + MyXmlParser.getFirstContent(test));
-
-        // todo:------------ end test
-
 
         // First things first, gotta be on the internet!
         if (!isInternetAvailable()) {
