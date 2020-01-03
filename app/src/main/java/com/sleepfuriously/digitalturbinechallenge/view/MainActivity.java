@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
 import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
+import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataRoot;
 import com.sleepfuriously.digitalturbinechallenge.presenter.ModelWindow;
 
 import java.util.List;
@@ -38,7 +39,7 @@ import java.util.List;
  * item details side-by-side using two vertical panes.
  */
 public class MainActivity extends AppCompatActivity
-        implements ModelWindow.ModelWindowTopLevelListener {
+        implements ModelWindow.ModelWindowXMLDataListener {
 
     //----------------------
     //  constants
@@ -118,7 +119,8 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
-        mw.requestTopLevelList(this, this);
+        mw.requestXmlData(this, this);
+//        mw.requestTopLevelList(this, this);
     }
 
 
@@ -136,6 +138,38 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
+     * Called when the xml data is ready.
+     *
+     * @param addData       A list of TopLevelItems populated with the results
+     *                      from the server call.
+     *
+     * @param success       True means that the call was successful.
+     *                      False indicates an error.
+     *
+     * @param errMsg        Error message. Only used if successful == false
+     */
+    @Override
+    public void returnXMLData(DTXmlDataRoot addData, boolean success, String errMsg) {
+
+        if (!success) {
+            Log.e(TAG, "returnXMLData() is unsuccessful. Msg = " + errMsg);
+            Toast.makeText(this, R.string.no_internet_warning, Toast.LENGTH_LONG).show();
+            finish();
+            return; // nec because finish() is not guaranteed to be immediate
+        }
+
+        Log.d(TAG, "success");
+
+        // todo: put the data in the recycler adapter
+
+
+        mMainRecyclerView.setAdapter(mRecyclerAdapter);
+
+        mProgressDialog.dismiss();
+    }
+
+/*
+    /**
      * Called when the top-level list is ready.
      *
      * @param topLevelList  A list of TopLevelItems populated with the results
@@ -146,7 +180,7 @@ public class MainActivity extends AppCompatActivity
      *
      * @param errMsg        Error message. Only used if successful == false
      */
-    @Override
+/*    @Override
     public void returnTopLevelList(List<TopLevelItem> topLevelList, boolean successful, String errMsg) {
 
         if (!successful) {
@@ -160,9 +194,8 @@ public class MainActivity extends AppCompatActivity
         mMainRecyclerView.setAdapter(mRecyclerAdapter);
 
         mProgressDialog.dismiss();
-
     }
-
+*/
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  classes

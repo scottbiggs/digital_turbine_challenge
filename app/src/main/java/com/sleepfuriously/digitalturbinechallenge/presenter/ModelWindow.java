@@ -8,9 +8,16 @@ import androidx.annotation.NonNull;
 import com.sleepfuriously.digitalturbinechallenge.model.DetailItem;
 import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
 import com.sleepfuriously.digitalturbinechallenge.model.UrlConstants;
+import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataRoot;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
+import retrofit2.http.GET;
 
 /**
  * All access to data comes through this class (using the
@@ -26,6 +33,11 @@ public class ModelWindow {
 
     private static final String TAG = ModelWindow.class.getSimpleName();
 
+    /** needed by retrofit */
+    public static final String NOT_USED_BASE_URL = "http://something.that.will.be.overriden.com/";
+
+    public static final String DT_DATA_URL =
+            "http://ads.appia.com/getAds?id=236&password=OVUJ1DJN&siteId=10777&deviceId=4230&sessionId=techtestsession&totalCampaignsRequested=10";
 
 
     //------------------------
@@ -55,6 +67,43 @@ public class ModelWindow {
 
 
     /**
+     * Starts the process of getting the XML data from the Digital Turbine
+     * server.  The data will be returned to the supplied listener.
+     *
+     * @param listener  The instance that implements
+     * @param ctx
+     */
+    public void requestXmlData(final ModelWindowXMLDataListener listener, Context ctx) {
+
+        // setup retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NOT_USED_BASE_URL)
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+
+        DTXmlServerInterface retrofitHandler =
+                retrofit.create(DTXmlServerInterface.class);
+
+        Call<DTXmlDataRoot> call = retrofitHandler.accessDTXmlServerForRoot();
+        call.enqueue(new Callback<DTXmlDataRoot>() {
+            @Override
+            public void onResponse(Call<DTXmlDataRoot> call, Response<DTXmlDataRoot> response) {
+                Log.d(TAG, "really? it worked?");
+                DTXmlDataRoot rootData = response.body();
+                listener.returnXMLData(rootData, true, null);
+            }
+
+            @Override
+            public void onFailure(Call<DTXmlDataRoot> call, Throwable t) {
+                Log.e(TAG, "failure acquiring xml data");
+                t.printStackTrace();
+                listener.returnXMLData(null, true, t.getMessage());
+            }
+        });
+
+    }
+
+    /**
      * Starts the process of getting a list of all the items at the top-level.
      * That data will be returned the the supplied listener (see below).
      *
@@ -65,8 +114,6 @@ public class ModelWindow {
      * @param ctx   Ye good ol' Context.
      */
     public void requestTopLevelList(final ModelWindowTopLevelListener listener, Context ctx) {
-
-        // todo
 
 //
 //        RequestQueue q = Volley.newRequestQueue(ctx);
@@ -121,6 +168,27 @@ public class ModelWindow {
 
     /**
      * Implement this interface to receive a callback when the
+     * xml data is retrieved from server.
+     */
+    public interface ModelWindowXMLDataListener {
+
+        /**
+         * Called when the xml data is ready.
+         *
+         * @param addData       An instance of the Ads class populated with the results
+         *                      from the server call.
+         *
+         * @param success       True means that the call was successful.
+         *                      False indicates an error.
+         *
+         * @param errMsg        Error message. Only used if successful == false
+         */
+        void returnXMLData(DTXmlDataRoot addData, boolean success, String errMsg);
+    }
+
+
+    /**
+     * Implement this interface to receive a callback when the
      * list of top-level items is retrieved from server.
      */
     public interface ModelWindowTopLevelListener {
@@ -159,4 +227,12 @@ public class ModelWindow {
         void returnDetail(@NonNull DetailItem detail, boolean successful, String errMsg);
     }
 
+
+    public interface DTXmlServerInterface {
+
+        @GET(DT_DATA_URL)
+        Call<DTXmlDataRoot> accessDTXmlServerForRoot();
+
+
+    }
 }
