@@ -3,6 +3,8 @@ package com.sleepfuriously.digitalturbinechallenge.model.dtXmlData;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Describes the primary data element in the Digital Turbine
  * data.
@@ -11,7 +13,7 @@ import org.simpleframework.xml.Root;
  * There may be lots and lots of 'em.
  */
 @Root(name = "ad", strict = true)
-public class DTXmlDataAd {
+public class DTXmlDataAd implements Serializable {
 
     @Element(name="appId")
     public String appId;

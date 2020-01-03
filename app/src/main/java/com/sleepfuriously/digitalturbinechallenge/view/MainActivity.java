@@ -201,84 +201,95 @@ public class MainActivity extends AppCompatActivity
     }
 */
 
+    /**
+     * Returns the data at the given position of the list of Ad
+     * data items.
+     */
+    public DTXmlDataAd getData(int pos) {
+        return mRecyclerAdapter.getData(pos);
+    }
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  classes
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-    @Deprecated
-    public static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
+//    @Deprecated
+//    public static class SimpleItemRecyclerViewAdapter
+//            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
+//
+//        private final MainActivity mParentActivity;
+//        private final List<DummyContent.DummyItem> mValues = null;
+//        private final boolean mTwoPane;
+//        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
+//                if (mTwoPane) {
+//                    Bundle arguments = new Bundle();
+//                    arguments.putString(ItemDetailFragment.DATA_ITEM_KEY, item.id);
+//                    ItemDetailFragment fragment = new ItemDetailFragment();
+//                    fragment.setArguments(arguments);
+//                    mParentActivity.getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.item_detail_container, fragment)
+//                            .commit();
+//                } else {
+//                    Context context = view.getContext();
+//                    Intent intent = new Intent(context, ItemDetailActivity.class);
+//                    intent.putExtra(ItemDetailFragment.DATA_ITEM_KEY, item.id);
+//
+//                    context.startActivity(intent);
+//                }
+//            }
+//        };
+//
+//        @Deprecated
+//        SimpleItemRecyclerViewAdapter(MainActivity parent,
+//                                      List<TopLevelItem> items,
+////                                      List<DummyContent.DummyItem> items,
+//                                      boolean twoPane) {
+//            // todo: fill in data
+////            mValues = items;
+//
+//            mParentActivity = parent;
+//            mTwoPane = twoPane;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//            View view = LayoutInflater.from(parent.getContext())
+//                    .inflate(R.layout.item_list_content, parent, false);
+//            return new ViewHolder(view);
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(final ViewHolder holder, int position) {
+//            holder.mName.setText(mValues.get(position).id);
+//            holder.mRating.setText(mValues.get(position).content);
+//
+//            holder.itemView.setTag(mValues.get(position));
+//            holder.itemView.setOnClickListener(mOnClickListener);
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return mValues.size();
+//        }
+//
+//        class ViewHolder extends RecyclerView.ViewHolder {
+//            final TextView mName;
+//            final TextView mRating;
+//            final ImageView mThumb;
+//
+//            ViewHolder(View view) {
+//                super(view);
+//                mName = view.findViewById(R.id.name_tv);
+//                mRating = view.findViewById(R.id.rating_tv);
+//                mThumb = view.findViewById(R.id.thumb_iv);
+//            }
+//        }
+//    }
 
-        private final MainActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues = null;
-        private final boolean mTwoPane;
-        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
-                if (mTwoPane) {
-                    Bundle arguments = new Bundle();
-                    arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
-                    ItemDetailFragment fragment = new ItemDetailFragment();
-                    fragment.setArguments(arguments);
-                    mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.item_detail_container, fragment)
-                            .commit();
-                } else {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, ItemDetailActivity.class);
-                    intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id);
 
-                    context.startActivity(intent);
-                }
-            }
-        };
-
-        SimpleItemRecyclerViewAdapter(MainActivity parent,
-                                      List<TopLevelItem> items,
-//                                      List<DummyContent.DummyItem> items,
-                                      boolean twoPane) {
-            // todo: fill in data
-//            mValues = items;
-
-            mParentActivity = parent;
-            mTwoPane = twoPane;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mName.setText(mValues.get(position).id);
-            holder.mRating.setText(mValues.get(position).content);
-
-            holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mName;
-            final TextView mRating;
-            final ImageView mThumb;
-
-            ViewHolder(View view) {
-                super(view);
-                mName = view.findViewById(R.id.name_tv);
-                mRating = view.findViewById(R.id.rating_tv);
-                mThumb = view.findViewById(R.id.thumb_iv);
-            }
-        }
-    }
 }

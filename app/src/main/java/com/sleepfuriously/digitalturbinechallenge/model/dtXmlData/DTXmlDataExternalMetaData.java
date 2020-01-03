@@ -2,11 +2,13 @@ package com.sleepfuriously.digitalturbinechallenge.model.dtXmlData;
 
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Holds the contents of the "externalMetadata" element
  */
 @Root(name = "externalMetadata", strict = false)
-public class DTXmlDataExternalMetaData {
+public class DTXmlDataExternalMetaData implements Serializable {
 
     // todo
 //    @Attribute(name = "xmlns:xsi")

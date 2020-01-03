@@ -1,6 +1,5 @@
 package com.sleepfuriously.digitalturbinechallenge.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
-import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
-import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataRoot;
 
 import java.util.List;
 
@@ -26,10 +23,26 @@ import java.util.List;
 public class MainListRecyclerViewAdapter
                 extends RecyclerView.Adapter<MainListViewHolder> {
 
+    //---------------------------
+    //  constants
+    //---------------------------
+
+    private final static String TAG = MainListRecyclerViewAdapter.class.getSimpleName();
+
+    //---------------------------
+    //  data
+    //---------------------------
+
+    /** primary data holder */
+    private List<DTXmlDataAd> mValues = null;
 
     private final MainActivity mParentActivity;
-    private List<DTXmlDataAd> mValues = null;
+
     private final boolean mTwoPane;
+
+    //---------------------------
+    //  methods
+    //---------------------------
 
 
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -37,24 +50,46 @@ public class MainListRecyclerViewAdapter
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "click", Toast.LENGTH_SHORT).show();
 
-            DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
+            DTXmlDataAd data = (DTXmlDataAd) view.getTag();  // returns the DTXmlAdData object
+
             if (mTwoPane) {
-                Bundle arguments = new Bundle();
-                arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
-                ItemDetailFragment fragment = new ItemDetailFragment();
-                fragment.setArguments(arguments);
+                // just start a fragment
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(ItemDetailFragment.DATA_ITEM_KEY, data);
+
+                ItemDetailFragment frag = new ItemDetailFragment();
+                frag.setArguments(bundle);
+
                 mParentActivity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.item_detail_container, fragment)
+                        .replace(R.id.item_detail_container, frag)
                         .commit();
-            } else {
+            }
+            else {
+                // start activity (it'll start the fragment)
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ItemDetailActivity.class);
-                intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(ItemDetailFragment.DATA_ITEM_KEY, data);
+                intent.putExtras(bundle);
 
                 context.startActivity(intent);
+
             }
+
         }
     };
+
+
+    /**
+     * Getter for the data held here.
+     *
+     * @param pos   The position in the data list (NOT the displayed position).
+     */
+    public DTXmlDataAd getData(int pos) {
+        return mValues.get(pos);
+    }
+
 
     MainListRecyclerViewAdapter(MainActivity parent,
                                 List<DTXmlDataAd> items,
@@ -78,8 +113,9 @@ public class MainListRecyclerViewAdapter
         holder.mName.setText(mValues.get(position).productName);
         holder.mRating.setText(Float.toString(mValues.get(position).rating));
 
-        // todo: make sure this works
+        // put the entire data into the tag
         holder.itemView.setTag(mValues.get(position));
+//        holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(mOnClickListener);
     }
 

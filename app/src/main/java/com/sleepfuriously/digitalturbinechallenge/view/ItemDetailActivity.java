@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.sleepfuriously.digitalturbinechallenge.R;
+import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -59,10 +60,17 @@ public class ItemDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
+
+            // Should be some data passed to this Activity. Grab it and
+            // pass it along to the fragment.
+            DTXmlDataAd data = (DTXmlDataAd) getIntent().getSerializableExtra(ItemDetailFragment.DATA_ITEM_KEY);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ItemDetailFragment.DATA_ITEM_KEY, data);
+//            arguments.putString(ItemDetailFragment.DATA_ITEM_KEY,
+//                    getIntent().getStringExtra(ItemDetailFragment.DATA_ITEM_KEY));
+
             ItemDetailFragment fragment = new ItemDetailFragment();
-            fragment.setArguments(arguments);
+            fragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.item_detail_container, fragment)
                     .commit();
