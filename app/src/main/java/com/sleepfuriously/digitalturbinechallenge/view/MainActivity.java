@@ -19,12 +19,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
 import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
+import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataRoot;
 import com.sleepfuriously.digitalturbinechallenge.presenter.ModelWindow;
 
@@ -61,7 +63,8 @@ public class MainActivity extends AppCompatActivity
     //  data
     //----------------------
 
-    SimpleItemRecyclerViewAdapter mRecyclerAdapter;
+    MainListRecyclerViewAdapter mRecyclerAdapter;
+//    SimpleItemRecyclerViewAdapter mRecyclerAdapter;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity
             mTwoPane = true;
         }
 
-        mMainRecyclerView = findViewById(R.id.item_list);
+        mMainRecyclerView = findViewById(R.id.top_list_rv);
         assert mMainRecyclerView != null;
 
 //        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane);
@@ -160,9 +163,10 @@ public class MainActivity extends AppCompatActivity
 
         Log.d(TAG, "success");
 
-        // todo: put the data in the recycler adapter
+        // get the list of items from our data
+        List<DTXmlDataAd> dataList = addData.adList;
 
-
+        mRecyclerAdapter = new MainListRecyclerViewAdapter(this, dataList, mTwoPane);
         mMainRecyclerView.setAdapter(mRecyclerAdapter);
 
         mProgressDialog.dismiss();
@@ -201,6 +205,8 @@ public class MainActivity extends AppCompatActivity
     //  classes
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+    @Deprecated
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
@@ -250,8 +256,8 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mName.setText(mValues.get(position).id);
+            holder.mRating.setText(mValues.get(position).content);
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -263,13 +269,15 @@ public class MainActivity extends AppCompatActivity
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mIdView;
-            final TextView mContentView;
+            final TextView mName;
+            final TextView mRating;
+            final ImageView mThumb;
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = view.findViewById(R.id.id_text);
-                mContentView = view.findViewById(R.id.content);
+                mName = view.findViewById(R.id.name_tv);
+                mRating = view.findViewById(R.id.rating_tv);
+                mThumb = view.findViewById(R.id.thumb_iv);
             }
         }
     }

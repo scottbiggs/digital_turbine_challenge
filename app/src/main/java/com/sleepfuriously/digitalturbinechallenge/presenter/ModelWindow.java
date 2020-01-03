@@ -103,64 +103,6 @@ public class ModelWindow {
 
     }
 
-    /**
-     * Starts the process of getting a list of all the items at the top-level.
-     * That data will be returned the the supplied listener (see below).
-     *
-     * @param listener  The instance that implements {@link ModelWindowTopLevelListener}.
-     *                  Its {@link ModelWindowTopLevelListener#returnTopLevelList(List, boolean, String)}
-     *                  method will be called when the value has been retrieved.
-     *
-     * @param ctx   Ye good ol' Context.
-     */
-    public void requestTopLevelList(final ModelWindowTopLevelListener listener, Context ctx) {
-
-//
-//        RequestQueue q = Volley.newRequestQueue(ctx);
-//
-//        StringRequest request = new StringRequest(Request.Method.GET, UrlConstants.FIRST_WORKING_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.d(TAG, "onResponse() successful");
-//
-//                    }
-//                },
-//
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // todo: handle error
-//                        Log.e(TAG, "onResponse() ERROR!!!");
-//                    }
-//                });
-//
-////            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, UrlConstants.FIRST_WORKING_URL, null,
-////                new Response.Listener<JSONArray>() {
-////                    @Override
-////                    public void onResponse(JSONArray response) {
-////                        List<TopLevelItem> topLevelItems = new ArrayList<>();
-////                        for (int i = 0; i < response.length(); i++) {
-////                            try {
-////                                JSONObject jsonObject = (JSONObject) response.get(i);
-////                                topLevelItems.add(new TopLevelItem(jsonObject));
-////                            } catch (JSONException e) {
-////                                e.printStackTrace();
-////                            }
-////                        }
-////                        listener.returnTopLevelList(topLevelItems, true, null);
-////                    }
-////                },
-////                new Response.ErrorListener() {
-////                    @Override
-////                    public void onErrorResponse(VolleyError error) {
-////                        listener.returnTopLevelList(null, false, error.getMessage());
-////                    }
-////                });
-//
-//        q.add(request);
-//
-    }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  interfaces & classes

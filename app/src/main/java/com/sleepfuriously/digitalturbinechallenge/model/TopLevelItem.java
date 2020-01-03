@@ -10,7 +10,7 @@ import org.json.JSONObject;
  */
 public class TopLevelItem {
 
-    private static final String TAG = TopLevelItem.class.getSimpleName();
+//    private static final String TAG = TopLevelItem.class.getSimpleName();
 
     public String str;
 
@@ -21,7 +21,7 @@ public class TopLevelItem {
     public TopLevelItem (JSONObject jsonObject) {
         str = jsonObject.toString();
 
-        Log.d(TAG, "constructing: " + str);
+//        Log.d(TAG, "constructing: " + str);
 //        try {
 //        }
 //        catch (JSONException e) {
