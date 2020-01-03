@@ -3,4 +3,6 @@
     <color name="colorPrimary">#C54245</color>
     <color name="colorPrimaryDark">#642327</color>
     <color name="colorAccent">#006400</color>
+
+    <color name="list_item_background">#fafafa</color>
 </resources>

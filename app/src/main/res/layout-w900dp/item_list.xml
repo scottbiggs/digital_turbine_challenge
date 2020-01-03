@@ -15,23 +15,22 @@
     <!--
     This layout is a two-pane layout for the Items
     master/detail flow.
-
     -->
 
     <FrameLayout
         android:id="@+id/item_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="2" />
 
-    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/top_list_rv"
         android:name="com.sleepfuriously.digitalturbinechallenge.ItemListFragment"
-        android:layout_width="@dimen/item_width"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_weight="1"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.sleepfuriously.digitalturbinechallenge.view.MainActivity"
         tools:listitem="@layout/item_list_content" />
