@@ -8,5 +8,8 @@
     <!-- loading messages -->
     <string name="initial_load_msg">getting initial data...</string>
 
+    <!-- data item layout -->
+    <string name="rating">rating:</string>
+
 
 </resources>
