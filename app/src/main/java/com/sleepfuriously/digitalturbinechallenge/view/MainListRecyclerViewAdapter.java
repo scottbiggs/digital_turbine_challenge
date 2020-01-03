@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -113,9 +114,14 @@ public class MainListRecyclerViewAdapter
         holder.mName.setText(mValues.get(position).productName);
         holder.mRating.setText(Float.toString(mValues.get(position).rating));
 
+        Context ctx = holder.mThumb.getContext();
+        DTXmlDataAd data = mValues.get(position);
+
+        Picasso.with(ctx).load(data.productThumbnail)
+                .into(holder.mThumb);
+
         // put the entire data into the tag
-        holder.itemView.setTag(mValues.get(position));
-//        holder.itemView.setTag(position);
+        holder.itemView.setTag(data);
         holder.itemView.setOnClickListener(mOnClickListener);
     }
 
