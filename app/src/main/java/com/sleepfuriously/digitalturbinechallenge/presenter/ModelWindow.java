@@ -133,16 +133,21 @@ public class ModelWindow {
      *
      * @param ctx       always useful
      *
+     * @param lastName  Required by specs
+     *
      * @param quantity  How many ads should this try to fetch at a time.
      */
     public void requestXmlData(final ModelWindowXMLDataListener listener,
-                               Context ctx, int quantity) {
+                               Context ctx,
+                               String lastName,
+                               int quantity) {
         Call<DTXmlDataRoot> call = mRetrofitHandler.accessRootData2(
                 DEFAULT_ID,
                 DEFAULT_PASSWORD,
                 DEFAULT_SITE_ID,
                 DEFAULT_DEVICE_ID,
                 DEFAULT_SESSIONO_ID,
+                lastName,
                 Integer.toString(quantity));
 
         call.enqueue(new Callback<DTXmlDataRoot>() {
@@ -260,6 +265,7 @@ public class ModelWindow {
          * @param siteId
          * @param deviceId
          * @param sessionId
+         * @param lastName      My last name. Required spec.
          * @param adsRequestedStr   Will return this many ads or fewer if
          *                          no more are available.
          */
@@ -270,6 +276,7 @@ public class ModelWindow {
                 @Query("siteId") String siteId,
                 @Query("deviceId") String deviceId,
                 @Query("sessionId") String sessionId,
+                @Query("lname") String lastName,
                 @Query("totalCampaignsRequested") String adsRequestedStr);
 
 //"http://ads.appia.com/getAds?id=236&password=OVUJ1DJN&siteId=10777&deviceId=4230&sessionId=techtestsession&totalCampaignsRequested=10";

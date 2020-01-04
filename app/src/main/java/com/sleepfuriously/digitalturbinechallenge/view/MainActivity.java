@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private static final String MY_LAST_NAME = "biggs";
+
     //----------------------
     //  widgets
     //----------------------
@@ -110,8 +112,7 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
-//        mw.requestXmlData(this, this);
-        mw.requestXmlData(this, this, 25);
+        mw.requestXmlData(this, this, MY_LAST_NAME, 25);
         mLoadingData = true;
 
         initScrollListener();
@@ -210,7 +211,7 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
-        mw.requestXmlData(this, this, 25);
+        mw.requestXmlData(this, this, MY_LAST_NAME, 25);
         mLoadingData = true;
     }
 
