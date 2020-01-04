@@ -119,8 +119,8 @@ public class ItemDetailFragment extends Fragment {
             if (mAdData.averageRatingImageURL != null) {
                 ((TextView) rootView.findViewById(R.id.average_rating_url_tv)).setText(mAdData.averageRatingImageURL);
                 ImageView imageView = rootView.findViewById(R.id.average_rating_url_iv);
-//                Picasso.with(ctx).load(mAdData.averageRatingImageURL).into(imageView);
 
+                // doing the hard way to properly handle errors (yes, this url has out-dated certificate
                 Picasso.Builder builder = new Picasso.Builder(ctx);
                 builder.listener(new Picasso.Listener() {
                     @Override
