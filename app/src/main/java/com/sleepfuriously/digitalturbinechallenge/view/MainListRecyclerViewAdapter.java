@@ -1,5 +1,6 @@
 package com.sleepfuriously.digitalturbinechallenge.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class MainListRecyclerViewAdapter
     //---------------------------
 
     /** primary data holder */
-    private List<DTXmlDataAd> mValues = null;
+    private List<DTXmlDataAd> mValues;
 
     private final MainActivity mParentActivity;
 
@@ -78,16 +79,6 @@ public class MainListRecyclerViewAdapter
     };
 
 
-    /**
-     * Getter for the data held here.
-     *
-     * @param pos   The position in the data list (NOT the displayed position).
-     */
-    public DTXmlDataAd getData(int pos) {
-        return mValues.get(pos);
-    }
-
-
     MainListRecyclerViewAdapter(MainActivity parent,
                                 List<DTXmlDataAd> items,
                                  boolean twoPane) {
@@ -105,6 +96,7 @@ public class MainListRecyclerViewAdapter
     }
 
 
+    @SuppressLint("SetTextI18n")    // removes warning for number locality issues
     @Override
     public void onBindViewHolder(final MainListViewHolder holder, int position) {
         holder.mName.setText(mValues.get(position).productName);

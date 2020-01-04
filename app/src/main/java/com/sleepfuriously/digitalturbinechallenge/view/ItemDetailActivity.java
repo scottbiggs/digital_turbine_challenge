@@ -43,10 +43,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-
             // Should be some data passed to this Activity. Grab it and
             // pass it along to the fragment.
             DTXmlDataAd data = (DTXmlDataAd) getIntent().getSerializableExtra(ItemDetailFragment.DATA_ITEM_KEY);

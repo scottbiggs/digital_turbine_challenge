@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
-        mw.requestXmlData(this, this, MY_LAST_NAME, 25);
+        mw.requestXmlData(this, MY_LAST_NAME, 25);
         mLoadingData = true;
 
         initScrollListener();
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
-        mw.requestXmlData(this, this, MY_LAST_NAME, 25);
+        mw.requestXmlData(this, MY_LAST_NAME, 25);
         mLoadingData = true;
     }
 

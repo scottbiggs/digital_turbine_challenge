@@ -1,5 +1,6 @@
 package com.sleepfuriously.digitalturbinechallenge.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -12,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +21,6 @@ import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -43,7 +42,7 @@ public class ItemDetailFragment extends Fragment {
      * The key that tells this fragment which Ad data to get
      * from MainActivity.
      */
-    public static final String DATA_ITEM_KEY = "item_id";
+    static final String DATA_ITEM_KEY = "item_id";
 
 
     //-------------------------------
@@ -93,6 +92,7 @@ public class ItemDetailFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")    // prevents locality number warnings
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
