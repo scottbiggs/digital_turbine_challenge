@@ -1,10 +1,482 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_detail"
-    style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".view.ItemDetailFragment" />
+    tools:context=".view.ItemDetailFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/text_margin"
+        >
+
+        <!-- app id -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/app_id_label"
+            />
+        <TextView
+            android:id="@+id/app_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/product_name_label"
+            />
+        <TextView
+            android:id="@+id/product_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- product id -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/product_id_label"
+            />
+        <TextView
+            android:id="@+id/product_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- product desc -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/product_desc_label"
+            />
+        <TextView
+            android:id="@+id/product_desc_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- rating -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/rating_label"
+            />
+        <TextView
+            android:id="@+id/rating_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- average rating url -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/average_rating_url_label"
+            />
+        <ImageView
+            android:id="@+id/average_rating_url_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+        <TextView
+            android:id="@+id/average_rating_url_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+        <!-- only used if an error loading image (which there are!) -->
+        <TextView
+            android:id="@+id/average_rating_err_label_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/error"
+            android:layout_marginStart="@dimen/text_margin"
+            android:text="@string/average_rating_url_error_label"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/average_rating_url_err_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:layout_marginStart="@dimen/text_margin"
+            android:visibility="gone"
+            />
+
+        <!-- bid rate -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/bid_rate_label"
+            />
+        <TextView
+            android:id="@+id/bid_rate_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- billing type id -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/billing_type_id_label"
+            />
+        <TextView
+            android:id="@+id/billing_type_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- call to action -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/call_to_action_label"
+            />
+        <TextView
+            android:id="@+id/call_to_action_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- campaign id -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/campaign_id_label"
+            />
+        <TextView
+            android:id="@+id/campaign_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- campaign display order -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/campaign_display_order_label"
+            />
+        <TextView
+            android:id="@+id/campaign_display_order_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- campaign type id -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/campaign_type_id_label"
+            />
+        <TextView
+            android:id="@+id/campaign_type_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- campaign type id -->
+
+        <!-- category name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/category_name_label"
+            />
+        <TextView
+            android:id="@+id/category_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- click proxy url -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/click_proxy_url_label"
+            />
+        <TextView
+            android:id="@+id/click_proxy_url_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- creative id -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/creative_id_label"
+            />
+        <TextView
+            android:id="@+id/creative_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- external metadata -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/external_metadata_label"
+            />
+        <TextView
+            android:id="@+id/external_metadata_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- home screen -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/home_screen_label"
+            />
+        <TextView
+            android:id="@+id/home_screen_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- impression tracking url -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/impression_tracking_url_label"
+            />
+        <TextView
+            android:id="@+id/impression_tracking_url_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- random pick -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/is_random_pick_label"
+            />
+        <TextView
+            android:id="@+id/random_pick_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- num_ratings -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/num_ratings_label"
+            />
+        <TextView
+            android:id="@+id/num_ratings_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- min os ver -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/min_os_ver_label"
+            />
+        <TextView
+            android:id="@+id/min_os_ver_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- product thumb -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/product_thumb_label"
+            />
+        <ImageView
+            android:id="@+id/product_thumb_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+        <TextView
+            android:id="@+id/product_thumb_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- num_downloads -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/num_downloads_label"
+            />
+        <TextView
+            android:id="@+id/num_downloads_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- tsti eligible -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/tsti_eligible_label"
+            />
+        <TextView
+            android:id="@+id/tsti_eligible_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- sti enabled -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/sti_enabled_label"
+            />
+        <TextView
+            android:id="@+id/sti_enabled_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- post_install_actions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/post_install_actions_label"
+            />
+        <TextView
+            android:id="@+id/post_install_actions_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+        <!-- privacy policy -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceSmall"
+            android:text="@string/privacy_policy_label"
+            />
+        <TextView
+            android:id="@+id/privacy_policy_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/textAppearanceListItemSmall"
+            android:text="null"
+            android:layout_marginStart="@dimen/text_margin"
+            />
+
+    </LinearLayout>
+</ScrollView>

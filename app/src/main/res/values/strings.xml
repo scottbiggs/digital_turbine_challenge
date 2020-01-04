@@ -8,8 +8,34 @@
     <!-- loading messages -->
     <string name="initial_load_msg">getting initial data...</string>
 
-    <!-- data item layout -->
-    <string name="rating">rating:</string>
-
+    <!-- data item layout labels -->
+    <string name="app_id_label">app id:</string>
+    <string name="product_name_label">product name:</string>
+    <string name="product_id_label">product id:</string>
+    <string name="product_desc_label">product description:</string>
+    <string name="rating_label">rating:</string>
+    <string name="average_rating_url_label">ave rating url:</string>
+    <string name="average_rating_url_error_label">image load error:</string>
+    <string name="bid_rate_label">bid rate:</string>
+    <string name="billing_type_id_label">billing type id:</string>
+    <string name="call_to_action_label">call to action:</string>
+    <string name="campaign_id_label">campaign id:</string>
+    <string name="campaign_display_order_label">campaign display order:</string>
+    <string name="campaign_type_id_label">campaign type id:</string>
+    <string name="category_name_label">category:</string>
+    <string name="click_proxy_url_label">click proxy url:</string>
+    <string name="creative_id_label">creative id:</string>
+    <string name="external_metadata_label">external metadata:</string>
+    <string name="home_screen_label">home screen:</string>
+    <string name="impression_tracking_url_label">impression tracking url:</string>
+    <string name="is_random_pick_label">random pick:</string>
+    <string name="num_ratings_label">number of ratings:</string>
+    <string name="min_os_ver_label">minimum OS version:</string>
+    <string name="product_thumb_label">product thumbnail:</string>
+    <string name="num_downloads_label">number of downloads:</string>
+    <string name="tsti_eligible_label">tsti eligible:</string>
+    <string name="sti_enabled_label">sti enabled:</string>
+    <string name="post_install_actions_label">post install actions:</string>
+    <string name="privacy_policy_label">privacy policy:</string>
 
 </resources>

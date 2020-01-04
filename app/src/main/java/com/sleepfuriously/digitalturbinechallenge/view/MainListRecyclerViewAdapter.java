@@ -49,8 +49,6 @@ public class MainListRecyclerViewAdapter
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), "click", Toast.LENGTH_SHORT).show();
-
             DTXmlDataAd data = (DTXmlDataAd) view.getTag();  // returns the DTXmlAdData object
 
             if (mTwoPane) {

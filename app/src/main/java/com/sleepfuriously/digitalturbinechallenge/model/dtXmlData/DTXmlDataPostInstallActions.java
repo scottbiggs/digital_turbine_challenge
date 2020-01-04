@@ -1,5 +1,7 @@
 package com.sleepfuriously.digitalturbinechallenge.model.dtXmlData;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
@@ -10,4 +12,10 @@ public class DTXmlDataPostInstallActions implements Serializable {
 
     // todo
 
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "null";
+    }
 }

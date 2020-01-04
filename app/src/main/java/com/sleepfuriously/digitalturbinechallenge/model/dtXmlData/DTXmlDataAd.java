@@ -12,7 +12,7 @@ import java.io.Serializable;
  * An "ad" seems to appear on the 2nd level, just below the root.
  * There may be lots and lots of 'em.
  */
-@Root(name = "ad", strict = true)
+@Root(name = "ad")
 public class DTXmlDataAd implements Serializable {
 
     @Element(name="appId")
@@ -45,7 +45,7 @@ public class DTXmlDataAd implements Serializable {
     @Element(name="categoryName")
     public String categoryName;
 
-    @Element(name="clickProxyURL")      // may cause probs
+    @Element(name="clickProxyURL")
     public String clickProxyURL;
 
     @Element(name="creativeId")
