@@ -33,6 +33,6 @@
         android:layout_weight="1"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.sleepfuriously.digitalturbinechallenge.view.MainActivity"
-        tools:listitem="@layout/item_list_content" />
+        tools:listitem="@layout/main_list_data_item" />
 
 </LinearLayout>

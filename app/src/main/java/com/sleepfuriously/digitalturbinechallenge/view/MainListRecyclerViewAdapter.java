@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sleepfuriously.digitalturbinechallenge.R;
-import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
 import com.squareup.picasso.Picasso;
 
@@ -102,7 +100,7 @@ public class MainListRecyclerViewAdapter
     @Override
     public MainListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_list_content, parent, false);
+                .inflate(R.layout.main_list_data_item, parent, false);
         return new MainListViewHolder(view);
     }
 

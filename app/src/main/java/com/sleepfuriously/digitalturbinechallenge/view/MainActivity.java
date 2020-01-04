@@ -2,30 +2,20 @@ package com.sleepfuriously.digitalturbinechallenge.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sleepfuriously.digitalturbinechallenge.R;
-import com.sleepfuriously.digitalturbinechallenge.model.DummyContent;
-import com.sleepfuriously.digitalturbinechallenge.model.TopLevelItem;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataRoot;
 import com.sleepfuriously.digitalturbinechallenge.presenter.ModelWindow;
@@ -64,13 +54,15 @@ public class MainActivity extends AppCompatActivity
     //----------------------
 
     MainListRecyclerViewAdapter mRecyclerAdapter;
-//    SimpleItemRecyclerViewAdapter mRecyclerAdapter;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private boolean mTwoPane;
+
+    /** lock to prevent from loading data while loading data */
+    private boolean mLoadingData = false;
 
     //----------------------
     //  methods
@@ -111,10 +103,6 @@ public class MainActivity extends AppCompatActivity
         mMainRecyclerView = findViewById(R.id.top_list_rv);
         assert mMainRecyclerView != null;
 
-//        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane);
-//        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane);
-//        mMainRecyclerView.setAdapter(mRecyclerAdapter);
-
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setIndeterminate(true);
@@ -122,8 +110,11 @@ public class MainActivity extends AppCompatActivity
         mProgressDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
-        mw.requestXmlData(this, this);
-//        mw.requestTopLevelList(this, this);
+//        mw.requestXmlData(this, this);
+        mw.requestXmlData(this, this, 25);
+        mLoadingData = true;
+
+        initScrollListener();
     }
 
 
@@ -154,6 +145,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void returnXMLData(DTXmlDataRoot addData, boolean success, String errMsg) {
 
+        mLoadingData = false;
+        mProgressDialog.dismiss();
+
         if (!success) {
             Log.e(TAG, "returnXMLData() is unsuccessful. Msg = " + errMsg);
             Toast.makeText(this, R.string.no_internet_warning, Toast.LENGTH_LONG).show();
@@ -169,127 +163,61 @@ public class MainActivity extends AppCompatActivity
         mRecyclerAdapter = new MainListRecyclerViewAdapter(this, dataList, mTwoPane);
         mMainRecyclerView.setAdapter(mRecyclerAdapter);
 
-        mProgressDialog.dismiss();
     }
 
-/*
-    /**
-     * Called when the top-level list is ready.
-     *
-     * @param topLevelList  A list of TopLevelItems populated with the results
-     *                      from the server call.
-     *
-     * @param successful    True means that the call was successful.
-     *                      False indicates an error.
-     *
-     * @param errMsg        Error message. Only used if successful == false
-     */
-/*    @Override
-    public void returnTopLevelList(List<TopLevelItem> topLevelList, boolean successful, String errMsg) {
-
-        if (!successful) {
-            Log.e(TAG, "returnTopLevelList() is unsuccessful. Msg = " + errMsg);
-            Toast.makeText(this, R.string.no_internet_warning, Toast.LENGTH_LONG).show();
-            finish();
-            return; // might be redundant?
-        }
-
-        mRecyclerAdapter = new SimpleItemRecyclerViewAdapter(this, topLevelList, mTwoPane);
-        mMainRecyclerView.setAdapter(mRecyclerAdapter);
-
-        mProgressDialog.dismiss();
-    }
-*/
 
     /**
-     * Returns the data at the given position of the list of Ad
-     * data items.
+     * The Scroll Listener is used to keep track of when the user reaches the bottom of the
+     * main list.  When they do, load some more data.
      */
-    public DTXmlDataAd getData(int pos) {
-        return mRecyclerAdapter.getData(pos);
+    private void initScrollListener() {
+        mMainRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (mLoadingData) {
+                    return; // already loading data, don't bother
+                }
+
+                LinearLayoutManager mgr = (LinearLayoutManager) mMainRecyclerView.getLayoutManager();
+
+                // check to see if the user has scrolled to the bottom of the list
+                if (mgr != null) {
+                    int lastPos = mgr.findLastCompletelyVisibleItemPosition();
+                    int count = mRecyclerAdapter.getItemCount();
+                    if (lastPos == mRecyclerAdapter.getItemCount() - 1) {
+                        Log.d(TAG, "loading more data! lastPos = " + lastPos + ", count = " + count);
+//                        loadMoreData();
+                    }
+                }
+            }
+        });
     }
+
+
+    private void loadMoreData() {
+
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle(R.string.initial_load_msg);
+        mProgressDialog.show();
+
+        ModelWindow mw = ModelWindow.getInstance();
+        mw.requestXmlData(this, this, 25);
+        mLoadingData = true;
+    }
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  classes
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-//    @Deprecated
-//    public static class SimpleItemRecyclerViewAdapter
-//            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-//
-//        private final MainActivity mParentActivity;
-//        private final List<DummyContent.DummyItem> mValues = null;
-//        private final boolean mTwoPane;
-//        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
-//                if (mTwoPane) {
-//                    Bundle arguments = new Bundle();
-//                    arguments.putString(ItemDetailFragment.DATA_ITEM_KEY, item.id);
-//                    ItemDetailFragment fragment = new ItemDetailFragment();
-//                    fragment.setArguments(arguments);
-//                    mParentActivity.getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.item_detail_container, fragment)
-//                            .commit();
-//                } else {
-//                    Context context = view.getContext();
-//                    Intent intent = new Intent(context, ItemDetailActivity.class);
-//                    intent.putExtra(ItemDetailFragment.DATA_ITEM_KEY, item.id);
-//
-//                    context.startActivity(intent);
-//                }
-//            }
-//        };
-//
-//        @Deprecated
-//        SimpleItemRecyclerViewAdapter(MainActivity parent,
-//                                      List<TopLevelItem> items,
-////                                      List<DummyContent.DummyItem> items,
-//                                      boolean twoPane) {
-//            // todo: fill in data
-////            mValues = items;
-//
-//            mParentActivity = parent;
-//            mTwoPane = twoPane;
-//        }
-//
-//        @NonNull
-//        @Override
-//        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(parent.getContext())
-//                    .inflate(R.layout.item_list_content, parent, false);
-//            return new ViewHolder(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(final ViewHolder holder, int position) {
-//            holder.mName.setText(mValues.get(position).id);
-//            holder.mRating.setText(mValues.get(position).content);
-//
-//            holder.itemView.setTag(mValues.get(position));
-//            holder.itemView.setOnClickListener(mOnClickListener);
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return mValues.size();
-//        }
-//
-//        class ViewHolder extends RecyclerView.ViewHolder {
-//            final TextView mName;
-//            final TextView mRating;
-//            final ImageView mThumb;
-//
-//            ViewHolder(View view) {
-//                super(view);
-//                mName = view.findViewById(R.id.name_tv);
-//                mRating = view.findViewById(R.id.rating_tv);
-//                mThumb = view.findViewById(R.id.thumb_iv);
-//            }
-//        }
-//    }
 
 
 }
