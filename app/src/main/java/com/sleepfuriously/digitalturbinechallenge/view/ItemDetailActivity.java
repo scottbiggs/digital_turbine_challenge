@@ -1,16 +1,11 @@
 package com.sleepfuriously.digitalturbinechallenge.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.sleepfuriously.digitalturbinechallenge.R;
 import com.sleepfuriously.digitalturbinechallenge.model.dtXmlData.DTXmlDataAd;
 
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
@@ -47,15 +42,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -66,8 +52,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             DTXmlDataAd data = (DTXmlDataAd) getIntent().getSerializableExtra(ItemDetailFragment.DATA_ITEM_KEY);
             Bundle bundle = new Bundle();
             bundle.putSerializable(ItemDetailFragment.DATA_ITEM_KEY, data);
-//            arguments.putString(ItemDetailFragment.DATA_ITEM_KEY,
-//                    getIntent().getStringExtra(ItemDetailFragment.DATA_ITEM_KEY));
 
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(bundle);
@@ -81,13 +65,10 @@ public class ItemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(new Intent(this, MainActivity.class));
+            // This ID represents the Home or Up button.
+//            navigateUpTo(new Intent(this, MainActivity.class));   // not needed for this simple app
+//            return true;
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

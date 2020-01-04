@@ -23,7 +23,7 @@ import com.sleepfuriously.digitalturbinechallenge.presenter.ModelWindow;
 import java.util.List;
 
 /**
- * An activity representing a list of Items. This activity
+ * The activity representing the main list of Items. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a {@link ItemDetailActivity} representing
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * Called when the xml data is ready.
      *
-     * @param addData       A list of TopLevelItems populated with the results
+     * @param addData       A list of Ads populated with the results
      *                      from the server call.
      *
      * @param success       True means that the call was successful.
@@ -201,7 +201,11 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-
+    /**
+     * Begins the process of loading more data.
+     *
+     * todo: not implemented as the API isn't designed to be used this way
+     */
     private void loadMoreData() {
 
         mProgressDialog = new ProgressDialog(this);
