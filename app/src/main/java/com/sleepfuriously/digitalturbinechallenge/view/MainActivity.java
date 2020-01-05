@@ -1,6 +1,6 @@
 package com.sleepfuriously.digitalturbinechallenge.view;
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -45,17 +45,17 @@ public class MainActivity extends AppCompatActivity
     //  widgets
     //----------------------
 
-    RecyclerView mMainRecyclerView;
+    private RecyclerView mMainRecyclerView;
 
     /** Gives user something to look at while waiting for data access */
-    ProgressDialog mProgressDialog;
+    private AlertDialog mLoadingDialog;
 
 
     //----------------------
     //  data
     //----------------------
 
-    MainListRecyclerViewAdapter mRecyclerAdapter;
+    private MainListRecyclerViewAdapter mRecyclerAdapter;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -105,17 +105,20 @@ public class MainActivity extends AppCompatActivity
         mMainRecyclerView = findViewById(R.id.top_list_rv);
         assert mMainRecyclerView != null;
 
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setTitle(R.string.initial_load_msg);
-        mProgressDialog.show();
+        mLoadingDialog = LoadingDialog.getLoadingDialogBuilder(this).create();
+        mLoadingDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
         mw.requestXmlData(this, MY_LAST_NAME, 25);
         mLoadingData = true;
 
         initScrollListener();
+    }
+
+    @Override
+    protected void onDestroy() {
+        LoadingDialog.onDestroy();
+        super.onDestroy();
     }
 
 
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity
     public void returnXMLData(DTXmlDataRoot addData, boolean success, String errMsg) {
 
         mLoadingData = false;
-        mProgressDialog.dismiss();
+        mLoadingDialog.dismiss();
 
         if (!success) {
             Log.e(TAG, "returnXMLData() is unsuccessful. Msg = " + errMsg);
@@ -208,16 +211,14 @@ public class MainActivity extends AppCompatActivity
      */
     private void loadMoreData() {
 
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setTitle(R.string.initial_load_msg);
-        mProgressDialog.show();
+        mLoadingDialog = LoadingDialog.getLoadingDialogBuilder(this).create();
+        mLoadingDialog.show();
 
         ModelWindow mw = ModelWindow.getInstance();
         mw.requestXmlData(this, MY_LAST_NAME, 25);
         mLoadingData = true;
     }
+
 
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
