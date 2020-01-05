@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
         if (!isInternetAvailable()) {
             Toast.makeText(this, R.string.no_internet_warning, Toast.LENGTH_LONG).show();
             finish();
+            return;
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -127,9 +128,10 @@ public class MainActivity extends AppCompatActivity
      * app has access to the internet currently.
      */
     private boolean isInternetAvailable() {
-        ConnectivityManager connectivityManager
+        ConnectivityManager cMgr
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        NetworkInfo activeNetworkInfo = cMgr.getActiveNetworkInfo();
         return (activeNetworkInfo != null)
                 && activeNetworkInfo.isAvailable()
                 && activeNetworkInfo.isConnected();
