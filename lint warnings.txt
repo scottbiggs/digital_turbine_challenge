@@ -1,0 +1,83 @@
+Executing tasks: [clean, :app:assembleDebug] in project /Users/user/AndroidStudioProjects/DigitalTurbineChallenge
+
+> Task :clean UP-TO-DATE
+> Task :app:clean
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkDebugManifest
+> Task :app:generateDebugBuildConfig
+> Task :app:compileDebugAidl NO-SOURCE
+> Task :app:compileDebugRenderscript NO-SOURCE
+> Task :app:mainApkListPersistenceDebug
+> Task :app:javaPreCompileDebug
+> Task :app:generateDebugResValues
+> Task :app:generateDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:processDebugManifest
+> Task :app:mergeDebugResources
+> Task :app:processDebugResources
+
+> Task :app:compileDebugJavaWithJavac
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:3: warning: [deprecation] ProgressDialog in android.app has been deprecated
+import android.app.ProgressDialog;
+                  ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:6: warning: [deprecation] NetworkInfo in android.net has been deprecated
+import android.net.NetworkInfo;
+                  ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:51: warning: [deprecation] ProgressDialog in android.app has been deprecated
+    ProgressDialog mProgressDialog;
+    ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:108: warning: [deprecation] ProgressDialog in android.app has been deprecated
+        mProgressDialog = new ProgressDialog(this);
+                              ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:108: warning: [deprecation] ProgressDialog(Context) in ProgressDialog has been deprecated
+        mProgressDialog = new ProgressDialog(this);
+                          ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:110: warning: [deprecation] setIndeterminate(boolean) in ProgressDialog has been deprecated
+        mProgressDialog.setIndeterminate(true);
+                       ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:129: warning: [deprecation] NetworkInfo in android.net has been deprecated
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:129: warning: [deprecation] getActiveNetworkInfo() in ConnectivityManager has been deprecated
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                                                           ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:131: warning: [deprecation] isAvailable() in NetworkInfo has been deprecated
+                && activeNetworkInfo.isAvailable()
+                                    ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:132: warning: [deprecation] isConnected() in NetworkInfo has been deprecated
+                && activeNetworkInfo.isConnected();
+                                    ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:211: warning: [deprecation] ProgressDialog in android.app has been deprecated
+        mProgressDialog = new ProgressDialog(this);
+                              ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:211: warning: [deprecation] ProgressDialog(Context) in ProgressDialog has been deprecated
+        mProgressDialog = new ProgressDialog(this);
+                          ^
+/Users/user/AndroidStudioProjects/DigitalTurbineChallenge/app/src/main/java/com/sleepfuriously/digitalturbinechallenge/view/MainActivity.java:213: warning: [deprecation] setIndeterminate(boolean) in ProgressDialog has been deprecated
+        mProgressDialog.setIndeterminate(true);
+                       ^
+13 warnings
+
+> Task :app:compileDebugSources
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders
+> Task :app:generateDebugAssets
+> Task :app:mergeDebugAssets
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:transformClassesWithDexBuilderForDebug
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeLibDexDebug
+> Task :app:validateSigningDebug
+> Task :app:signingConfigWriterDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugNativeLibs
+> Task :app:stripDebugDebugSymbols
+> Task :app:mergeExtDexDebug
+> Task :app:packageDebug
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 4s
+27 actionable tasks: 26 executed, 1 up-to-date
