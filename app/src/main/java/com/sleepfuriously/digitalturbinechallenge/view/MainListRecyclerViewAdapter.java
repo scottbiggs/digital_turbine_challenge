@@ -105,7 +105,7 @@ public class MainListRecyclerViewAdapter
         Context ctx = holder.mThumb.getContext();
         DTXmlDataAd data = mValues.get(position);
 
-        Picasso.with(ctx).load(data.productThumbnail)
+        Picasso.get().load(data.productThumbnail)
                 .into(holder.mThumb);
 
         // put the entire data into the tag

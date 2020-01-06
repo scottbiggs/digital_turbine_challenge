@@ -185,7 +185,7 @@ public class ItemDetailFragment extends Fragment {
             if (mAdData.productThumbnail != null) {
                 ((TextView) rootView.findViewById(R.id.product_thumb_tv)).setText(mAdData.productThumbnail);
                 ImageView thumbIv = rootView.findViewById(R.id.product_thumb_iv);
-                Picasso.with(ctx).load(mAdData.productThumbnail).into(thumbIv);
+                Picasso.get().load(mAdData.productThumbnail).into(thumbIv);
             }
 
             if (mAdData.numberOfDownloads != null)
